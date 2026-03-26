@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Reni Kaza</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#E10600;--red2:#ff2a26;--carbon:#0d0d0d;--dark:#141414;
+  --card:#181818;--card2:#1f1f1f;--border:rgba(255,255,255,0.07);
+  --text:#f2f2f2;--muted:#888;--gold:#FFD700;
+  --head:'Barlow Condensed',sans-serif;--body:'Barlow',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--carbon);color:var(--text);font-family:var(--body);line-height:1.6;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    repeating-linear-gradient(45deg,rgba(255,255,255,0.012) 0px,rgba(255,255,255,0.012) 1px,transparent 1px,transparent 8px),
+    repeating-linear-gradient(-45deg,rgba(255,255,255,0.012) 0px,rgba(255,255,255,0.012) 1px,transparent 1px,transparent 8px);
+}
+nav{
+  position:sticky;top:0;z-index:200;height:52px;
+  background:rgba(13,13,13,0.97);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;
+}
+.nav-logo{font-family:var(--head);font-size:1.3rem;font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--text)}
+.nav-logo span{color:var(--red)}
+.nav-links{display:flex;gap:2.5rem}
+.nav-links a{
+  font-family:var(--head);font-size:0.8rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  text-decoration:none;transition:color .2s;position:relative;
+}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--red);transition:width .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.speed-stripe{height:4px;background:var(--red);position:relative;overflow:hidden}
+.speed-stripe::after{
+  content:'';position:absolute;top:0;left:-100%;width:40%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);
+  animation:shine 3s infinite;
+}
+@keyframes shine{0%{left:-100%}100%{left:200%}}
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:0 2.5rem;position:relative;overflow:hidden;background:#0d0d0d;
+}
+.hero-bg-number{
+  position:absolute;right:-2rem;top:50%;transform:translateY(-50%);
+  font-family:var(--head);font-size:clamp(18rem,30vw,28rem);font-weight:900;
+  color:rgba(225,6,0,0.04);line-height:1;user-select:none;letter-spacing:-10px;pointer-events:none;
+}
+.hero-flag{
+  position:absolute;top:0;right:0;width:6px;height:100%;
+  background:repeating-linear-gradient(180deg,#fff 0px,#fff 20px,#000 20px,#000 40px);
+  opacity:0.06;
+}
+.hero-inner{max-width:860px;position:relative;z-index:1}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--head);font-size:0.75rem;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;color:#ff6b6b;margin-bottom:2rem;
+}
+.live-dot{width:8px;height:8px;background:var(--red);border-radius:50%;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.8)}}
+.hero h1{
+  font-family:var(--head);font-size:clamp(4rem,10vw,8rem);font-weight:900;
+  line-height:0.9;letter-spacing:-2px;text-transform:uppercase;margin-bottom:1.5rem;
+}
+.hero h1 .line2{color:var(--red);display:block}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:500px;margin-bottom:3rem;line-height:1.7}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:4rem}
+.btn-red{
+  font-family:var(--head);font-weight:800;font-size:0.85rem;
+  letter-spacing:2px;text-transform:uppercase;
+  background:var(--red);color:#fff;padding:12px 32px;text-decoration:none;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 100%,10px 100%);
+  transition:background .2s,transform .15s;
+}
+.btn-red:hover{background:var(--red2);transform:translateY(-2px)}
+.btn-outline{
+  font-family:var(--head);font-weight:700;font-size:0.85rem;
+  letter-spacing:2px;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,0.2);color:var(--text);
+  padding:12px 32px;text-decoration:none;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 100%,10px 100%);
+  transition:border-color .2s,transform .15s;
+}
+.btn-outline:hover{border-color:rgba(255,255,255,0.5);transform:translateY(-2px)}
+.telemetry{display:flex;gap:0;border-top:1px solid var(--border);padding-top:2rem;flex-wrap:wrap}
+.telem-item{padding:0 2.5rem 0 0;margin-right:2.5rem;border-right:1px solid var(--border)}
+.telem-item:last-child{border-right:none}
+.telem-val{font-family:var(--head);font-size:2.8rem;font-weight:900;color:var(--red);line-height:1;letter-spacing:-1px}
+.telem-label{font-family:var(--head);font-size:0.65rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.section{padding:7rem 2.5rem;max-width:1020px;margin:0 auto;position:relative;z-index:1}
+.section-eyebrow{
+  font-family:var(--head);font-size:0.65rem;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;color:var(--red);
+  margin-bottom:0.5rem;display:flex;align-items:center;gap:12px;
+}
+.section-eyebrow::before{content:'';display:block;width:32px;height:2px;background:var(--red)}
+.section-title{font-family:var(--head);font-size:clamp(2rem,4vw,3rem);font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:3.5rem}
+.tl-item{display:grid;grid-template-columns:200px 1fr;gap:0;margin-bottom:1px}
+.tl-left{
+  background:var(--card2);border:1px solid var(--border);border-right:none;
+  padding:2rem 1.5rem;display:flex;flex-direction:column;justify-content:flex-start;position:relative;
+}
+.tl-left::after{content:'';position:absolute;right:-1px;top:0;bottom:0;width:3px;background:var(--red)}
+.tl-company{font-family:var(--head);font-size:1.1rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:4px}
+.tl-date{font-family:var(--head);font-size:0.7rem;font-weight:700;letter-spacing:2px;color:var(--red);text-transform:uppercase}
+.tl-loc{font-size:0.78rem;color:var(--muted);margin-top:8px}
+.tl-right{background:var(--card);border:1px solid var(--border);padding:2rem}
+.tl-role{font-family:var(--head);font-size:1.3rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.25rem}
+.star-row{margin-bottom:1rem}
+.star-label{font-family:var(--head);font-size:0.6rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:3px}
+.star-text{font-size:0.88rem;color:var(--muted);line-height:1.65}
+.badge-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem}
+.badge{
+  font-family:var(--head);font-size:0.75rem;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  background:rgba(225,6,0,0.12);border:1px solid rgba(225,6,0,0.25);
+  color:#ff8080;padding:5px 12px;
+  clip-path:polygon(0 0,calc(100% - 6px) 0,100% 100%,6px 100%);
+}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px}
+.proj-card{
+  background:var(--card);border:1px solid var(--border);
+  padding:2rem;position:relative;overflow:hidden;
+  transition:border-color .2s,transform .2s;display:flex;flex-direction:column;
+}
+.proj-card::before{
+  content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+  background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.proj-card:hover{border-color:rgba(225,6,0,0.3);transform:translateY(-4px)}
+.proj-card:hover::before{transform:scaleX(1)}
+.proj-num{font-family:var(--head);font-size:3.5rem;font-weight:900;color:rgba(255,255,255,0.04);line-height:1;margin-bottom:1rem;letter-spacing:-2px}
+.proj-title{font-family:var(--head);font-size:1.2rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.25rem}
+.proj-why{font-family:var(--head);font-size:0.6rem;font-weight:700;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:0.75rem}
+.proj-desc{font-size:0.85rem;color:var(--muted);line-height:1.65;flex:1;margin-bottom:1.25rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1.25rem}
+.proj-tag{font-size:0.72rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:3px 8px;color:#aaa}
+.proj-link{font-family:var(--head);font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+.proj-link:hover{gap:10px}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px}
+.skill-group{background:var(--card);border:1px solid var(--border);padding:1.75rem}
+.sg-label{font-family:var(--head);font-size:0.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.sg-label::before{content:'';display:block;width:20px;height:2px;background:var(--red)}
+.skill-chip{display:inline-block;font-size:0.78rem;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);padding:4px 10px;margin:3px 3px 0 0;color:#ccc}
+.contact-wrap{background:var(--card);border:1px solid var(--border);padding:4rem;position:relative;overflow:hidden}
+.contact-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--red)}
+.contact-title{font-family:var(--head);font-size:clamp(2rem,5vw,3.5rem);font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:1rem}
+.contact-sub{color:var(--muted);margin-bottom:2.5rem;max-width:480px}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px}
+.contact-item{background:var(--card2);border:1px solid var(--border);padding:1.25rem 1.5rem;text-decoration:none;display:flex;flex-direction:column;gap:4px;transition:border-color .2s,background .2s}
+.contact-item:hover{border-color:rgba(225,6,0,0.4);background:rgba(225,6,0,0.05)}
+.contact-item-label{font-family:var(--head);font-size:0.6rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red)}
+.contact-item-val{font-size:0.9rem;color:var(--text)}
+.seg-divider{height:1px;background:var(--border);margin:0}
+.red-line{height:3px;background:var(--red)}
+footer{text-align:center;padding:2rem;color:var(--muted);font-family:var(--head);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;border-top:1px solid var(--border);position:relative;z-index:1}
+@media(max-width:640px){
+  nav{padding:0 1rem}.nav-links{gap:1.25rem}
+  .section{padding:4rem 1rem}.tl-item{grid-template-columns:1fr}
+  .tl-left::after{display:none}.hero{padding:0 1rem}
+  .contact-wrap{padding:2rem 1rem}.hero-bg-number{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Reni <span>Kaza</span></div>
+  <div class="nav-links">
+    <a href="#experience">Pit Lane</a>
+    <a href="#projects">Garage</a>
+    <a href="#skills">Tech</a>
+    <a href="#contact">Radio</a>
+  </div>
+</nav>
+<div class="speed-stripe"></div>
+
+<div class="hero">
+  <div class="hero-bg-number">47</div>
+  <div class="hero-flag"></div>
+  <div class="hero-inner">
+    <div class="hero-tag"><span class="live-dot"></span>Available from May 2026</div>
+    <h1>Reni<span class="line2">Kaza</span></h1>
+    <p class="hero-sub">Software engineer building backend systems, data pipelines, and AI tools that perform at scale. CS @ University of Maryland.</p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-red">View my journey</a>
+      <a href="mailto:renikaza@terpmail.umd.edu" class="btn-outline">Get in touch</a>
+    </div>
+    <div class="telemetry">
+      <div class="telem-item"><div class="telem-val">35%</div><div class="telem-label">API latency cut</div></div>
+      <div class="telem-item"><div class="telem-val">1.2M+</div><div class="telem-label">Data points processed</div></div>
+      <div class="telem-item"><div class="telem-val">40%</div><div class="telem-label">Fewer client bugs</div></div>
+      <div class="telem-item"><div class="telem-val">3</div><div class="telem-label">Internships</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="red-line"></div>
+
+<div class="section" id="experience">
+  <p class="section-eyebrow">Pit Lane</p>
+  <h2 class="section-title">Race History</h2>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-company">Dow Jones</div>
+        <div class="tl-date">Jun – Aug 2025</div>
+        <div class="tl-loc">OPIS &bull; Gaithersburg, MD</div>
+      </div>
+      <div class="tl-right">
+        <div class="tl-role">Software Engineer Intern</div>
+        <div class="star-row"><div class="star-label">Situation</div><div class="star-text">An oil supply chain platform was generating a stream of client-reported bugs, slowing releases and eroding confidence in the API layer.</div></div>
+        <div class="star-row"><div class="star-label">Action</div><div class="star-text">Joined a team of 6 to stabilize the React / Node.js / .NET stack. Debugged and optimized MSSQL Server queries, improved validation logic, and built 200+ NUnit tests for the Order Management API.</div></div>
+        <div class="star-row"><div class="star-label">Result</div></div>
+        <div class="badge-row">
+          <span class="badge">&#8595; 40% client issues</span>
+          <span class="badge">&#8595; 35% API latency</span>
+          <span class="badge">Manual QA eliminated</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-company">NOAA CISESS</div>
+        <div class="tl-date">May – Dec 2024</div>
+        <div class="tl-loc">Riverdale, MD</div>
+      </div>
+      <div class="tl-right">
+        <div class="tl-role">Software Engineer Intern</div>
+        <div class="star-row"><div class="star-label">Situation</div><div class="star-text">Forecast validation workflows were slow and unreliable — large precipitation datasets took too long and produced inconsistent ML evaluation scores.</div></div>
+        <div class="star-row"><div class="star-label">Action</div><div class="star-text">Built Python (Flask/Django) pipelines processing 1.2M+ data points. Added batch aggregation for time-series optimization. Deployed via Docker and Kubernetes with full CI/CD.</div></div>
+        <div class="badge-row">
+          <span class="badge">&#8593; 30% validation accuracy</span>
+          <span class="badge">&#8595; 40% runtime</span>
+          <span class="badge">Docker + K8s deployment</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-company">USP</div>
+        <div class="tl-date">Jun – Aug 2024</div>
+        <div class="tl-loc">United States Pharmacopeia &bull; Rockville, MD</div>
+      </div>
+      <div class="tl-right">
+        <div class="tl-role">Data Science Intern</div>
+        <div class="star-row"><div class="star-label">Situation</div><div class="star-text">11,000+ medicine records sat in S3 unstructured — no consistent data quality, no centralized access, slow ad-hoc queries.</div></div>
+        <div class="star-row"><div class="star-label">Action</div><div class="star-text">Engineered an ETL pipeline in Python and Apache Spark on Databricks transforming S3 records into a data lake. Built PySpark scripts for automated data quality checks and collaborated on a centralized SQL data warehouse.</div></div>
+        <div class="badge-row">
+          <span class="badge">&#8593; 30% processing speed</span>
+          <span class="badge">&#8595; 35% validation errors</span>
+          <span class="badge">Data warehouse shipped</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-company">UMD Lab</div>
+        <div class="tl-date">Aug 2024 – Present</div>
+        <div class="tl-loc">Stormwater IR&amp;J Lab &bull; College Park</div>
+      </div>
+      <div class="tl-right">
+        <div class="tl-role">Research Assistant</div>
+        <div class="star-row"><div class="star-label">Situation</div><div class="star-text">Water quality sensor data from 1.3M+ records needed large-scale analysis and clear communication to non-technical policymakers.</div></div>
+        <div class="star-row"><div class="star-label">Action</div><div class="star-text">Built Big Data pipelines on GCP, deployed containerized services with Docker + Kubernetes (GKE), managed infra via Terraform, and built Plotly/D3.js dashboards integrated with ArcGIS StoryMap.</div></div>
+        <div class="badge-row">
+          <span class="badge">1.3M+ records at scale</span>
+          <span class="badge">GCP + Terraform infra</span>
+          <span class="badge">Live policy dashboards</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="seg-divider"></div>
+
+<div class="section" id="projects">
+  <p class="section-eyebrow">Garage</p>
+  <h2 class="section-title">Personal Builds</h2>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-num">01</div>
+      <div class="proj-why">Why I built it</div>
+      <div class="proj-title">StudyMate</div>
+      <p class="proj-desc">Finding the right study partner felt like luck. I built a system to match students by actual academic goals, with a Gemini-powered AI assistant for real-time Q&amp;A while they studied together.</p>
+      <div class="proj-tags"><span class="proj-tag">Kotlin</span><span class="proj-tag">Firebase</span><span class="proj-tag">Gemini API</span><span class="proj-tag">Android</span></div>
+      <a href="https://github.com/Nexus4757/studymate" class="proj-link" target="_blank">View on GitHub &rarr;</a>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">02</div>
+      <div class="proj-why">Why I built it</div>
+      <div class="proj-title">JustVRIt</div>
+      <p class="proj-desc">Science concepts like protein folding are impossible to grasp from a textbook. I combined RAG search with AlphaFold and Unity VR so users can walk through scientific answers in 3D space.</p>
+      <div class="proj-tags"><span class="proj-tag">C++</span><span class="proj-tag">Unity</span><span class="proj-tag">RAG</span><span class="proj-tag">LangChain</span><span class="proj-tag">OpenAI API</span></div>
+      <a href="https://github.com/Nexus4757/VRit" class="proj-link" target="_blank">View on GitHub &rarr;</a>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">03</div>
+      <div class="proj-why">Why I built it</div>
+      <div class="proj-title">Music Recommendation System</div>
+      <p class="proj-desc">Curious about how Spotify surfaces songs, I built a content-based recommender using NLP on lyrics. Wrestling with large datasets taught me more about data engineering than any course.</p>
+      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">NLP</span><span class="proj-tag">TF-IDF</span><span class="proj-tag">Cosine Similarity</span></div>
+      <a href="https://github.com/Nexus4757/Music-Recommendation-System" class="proj-link" target="_blank">View on GitHub &rarr;</a>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">04</div>
+      <div class="proj-why">Why I built it</div>
+      <div class="proj-title">Campus Water Dashboard</div>
+      <p class="proj-desc">Water quality data was buried in spreadsheets. I built a live dashboard to make environmental sensor data transparent and actionable for students and administrators.</p>
+      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">GCP</span><span class="proj-tag">Plotly</span><span class="proj-tag">D3.js</span></div>
+      <a href="https://github.com/Nexus4757/campus-water-dashboard" class="proj-link" target="_blank">View on GitHub &rarr;</a>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">05</div>
+      <div class="proj-why">Why I built it</div>
+      <div class="proj-title">Diabetic Trends Analysis</div>
+      <p class="proj-desc">Explored population-level health data to surface patterns across demographics — built as an exercise in cleaning messy real-world data and making it tell a story through visualization.</p>
+      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Jupyter</span><span class="proj-tag">Pandas</span><span class="proj-tag">NumPy</span></div>
+      <a href="https://github.com/Nexus4757/Diabetic-trends" class="proj-link" target="_blank">View on GitHub &rarr;</a>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">06</div>
+      <div class="proj-why">Why I built it</div>
+      <div class="proj-title">Face Mask Detection</div>
+      <p class="proj-desc">An early experiment applying CV and deep learning to a socially meaningful problem. Built a real-time mask compliance detector that showed me how quickly ML can be put to practical use.</p>
+      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">TensorFlow</span><span class="proj-tag">OpenCV</span></div>
+      <a href="https://github.com/Nexus4757/Face-Mask-Detection" class="proj-link" target="_blank">View on GitHub &rarr;</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="seg-divider"></div>
+
+<div class="section" id="skills">
+  <p class="section-eyebrow">Technical</p>
+  <h2 class="section-title">Under the Hood</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="sg-label">Languages</div>
+      <span class="skill-chip">Python</span><span class="skill-chip">C#</span><span class="skill-chip">Java</span><span class="skill-chip">JavaScript</span><span class="skill-chip">SQL</span><span class="skill-chip">Rust</span><span class="skill-chip">C/C++</span><span class="skill-chip">Kotlin</span><span class="skill-chip">OCaml</span><span class="skill-chip">R</span>
+    </div>
+    <div class="skill-group">
+      <div class="sg-label">Frameworks</div>
+      <span class="skill-chip">.NET</span><span class="skill-chip">React</span><span class="skill-chip">Node.js</span><span class="skill-chip">Flask</span><span class="skill-chip">Django</span><span class="skill-chip">Spark</span><span class="skill-chip">TensorFlow</span><span class="skill-chip">Pandas</span><span class="skill-chip">LangChain</span>
+    </div>
+    <div class="skill-group">
+      <div class="sg-label">Cloud &amp; DevOps</div>
+      <span class="skill-chip">AWS</span><span class="skill-chip">GCP</span><span class="skill-chip">Azure</span><span class="skill-chip">Docker</span><span class="skill-chip">Kubernetes</span><span class="skill-chip">Terraform</span><span class="skill-chip">CI/CD</span><span class="skill-chip">Linux</span>
+    </div>
+    <div class="skill-group">
+      <div class="sg-label">AI &amp; Data</div>
+      <span class="skill-chip">RAG</span><span class="skill-chip">OpenAI API</span><span class="skill-chip">Gemini API</span><span class="skill-chip">PySpark</span><span class="skill-chip">Databricks</span><span class="skill-chip">NLP</span><span class="skill-chip">NumPy</span>
+    </div>
+  </div>
+</div>
+
+<div class="red-line"></div>
+
+<div class="section" id="contact">
+  <div class="contact-wrap">
+    <p class="section-eyebrow">Team Radio</p>
+    <h2 class="contact-title">Let's Connect</h2>
+    <p class="contact-sub">Open to full-time software engineering roles starting May 2026. Based in Washington DC area.</p>
+    <div class="contact-grid">
+      <a href="mailto:renikaza@terpmail.umd.edu" class="contact-item">
+        <span class="contact-item-label">Email</span>
+        <span class="contact-item-val">renikaza@terpmail.umd.edu</span>
+      </a>
+      <a href="https://www.linkedin.com/in/renikaza/" class="contact-item" target="_blank">
+        <span class="contact-item-label">LinkedIn</span>
+        <span class="contact-item-val">linkedin.com/in/renikaza</span>
+      </a>
+      <a href="https://github.com/Nexus4757" class="contact-item" target="_blank">
+        <span class="contact-item-label">GitHub</span>
+        <span class="contact-item-val">github.com/Nexus4757</span>
+      </a>
+      <a href="tel:7324852647" class="contact-item">
+        <span class="contact-item-label">Phone</span>
+        <span class="contact-item-val">(732) 485-2647</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Reni Kaza &nbsp;&bull;&nbsp; University of Maryland &nbsp;&bull;&nbsp; B.S. Computer Science, May 2026 &nbsp;&bull;&nbsp; Built with F1 energy
+</footer>
+
+</body>
+</html>
